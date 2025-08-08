@@ -4,52 +4,87 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tore Hofstad</title>
 <style>
-  :root{--w:760px}
-  body{max-width:var(--w);margin:3rem auto;padding:0 1rem;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  h1{font-size:1.9rem;margin:0 0 .25rem}
-  h2{font-size:1.2rem;margin:2rem 0 .5rem}
-  a{color:inherit}
-  .muted{color:#555}
-  hr{margin:1.5rem 0;border:0;border-top:1px solid #ddd}
-  ul{margin:.25rem 0 0 1.25rem}
-  li{margin:.4rem 0}
+  :root {
+    --max: 980px;
+    --accent: #0f766e; /* subtle teal accent */
+  }
+  /* Light/dark auto */
+  @media (prefers-color-scheme: dark) {
+    :root { --accent:#5eead4; }
+    body { background:#0b0f14; color:#e5e7eb; }
+    a { color: var(--accent); }
+    .muted { color:#9aa4af; }
+    .card { background:#0f1620; border-color:#1f2937; }
+  }
+
+  /* Base */
+  body{margin:3rem auto;padding:0 1rem;max-width:var(--max);
+       font:16.5px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#0f172a}
+  h1{font-weight:700;letter-spacing:.02em;margin:0}
+  h2{margin:2rem 0 .75rem;font-size:1.1rem;text-transform:uppercase;letter-spacing:.06em}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .muted{color:#4b5563}
+  .rule{height:1px;background:linear-gradient(90deg,#ddd,transparent);margin:1.5rem 0}
+
+  /* Layout */
+  .header{display:grid;grid-template-columns:1fr;gap:1.25rem;align-items:center}
+  .lead{font-size:1.05rem}
+  .photo{
+    width:140px;height:140px;object-fit:cover;border-radius:50%;
+    box-shadow:0 2px 20px rgba(0,0,0,.08);border:1px solid #e5e7eb
+  }
+  @media (min-width:860px){
+    .header{grid-template-columns:auto 180px}
+    .photo{width:160px;height:160px;justify-self:end}
+  }
+
+  /* Nice cards for sections */
+  .card{border:1px solid #e5e7eb;border-radius:18px;padding:1rem 1.25rem}
+  .stack > * + *{margin-top:.6rem} /* vertical rhythm */
+
+  /* Publication list: one item per line, no bullets */
+  .pubs p{margin:.6rem 0}
 </style>
 
-<header>
-  <h1>Tore Hofstad</h1>
-  <p>
-    <a href="https://www.helse-bergen.no/avdelinger/psykisk-helsevern/forskingsavdelinga-divisjon-psykisk-helsevern/populasjonshelse/">
-      Researcher at Centre for Population Health
-    </a>
-  </p>
-  <p class="muted">Guest researcher, Centre for Medical Ethics (CME), Institute of Health and Society (HELSAM), University of Oslo </p>
-  <p>
-    <a href="mailto:tore.hofstad@medisin.uio.no">tore.hofstad@medisin.uio.no</a> ·
-    <span>+47 466 64 946</span> ·
-    <a href="https://www.med.uio.no/helsam/personer/vit/torehof/">UiO profile</a>
-  </p>
-</header>
+<body>
 
-<hr>
+  <section class="header">
+    <div>
+      <h1>Tore Hofstad</h1>
+      <p class="muted">Guest researcher, Centre for Medical Ethics (CME), Institute of Health and Society (HELSAM), University of Oslo</p>
+      <p class="lead stack">
+        <span><a href="mailto:tore.hofstad@medisin.uio.no">tore.hofstad@medisin.uio.no</a></span>
+        <span><a href="https://www.med.uio.no/helsam/personer/vit/torehof/">UiO profile</a> · <a href="#">CV</a></span>
+      </p>
+    </div>
+    <img class="photo" src="assets/torehof.jpg" alt="Portrait of Tore Hofstad">
+  </section>
 
-<section>
-  <h2>Research interests</h2>
-  <ul>
-    <li>Coercion in mental health care</li>
-    <li>Geographical variation in health services</li>
-    <li>Statistical methods for causal inference</li>
-  </ul>
-</section>
+  <div class="rule"></div>
 
-<section>
-  <h2>Selected links</h2>
-  <ul>
-    <li><a href="https://scholar.google.com/citations?user=mvEAdH0AAAAJ">Google Scholar</a></li>
-    <li><a href="https://www.researchgate.net/profile/Tore-Hofstad">ResearchGate</a></li>
-  </ul>
-</section>
+  <section class="card">
+    <h2>Research interests</h2>
+    <div class="stack">
+      <div>Coercion in mental health care</div>
+      <div>Geographical variation in health services</div>
+      <div>Statistical methods for causal inference</div>
+    </div>
+  </section>
 
-<section>
+  <div style="height:1rem"></div>
+
+  <section class="card">
+    <h2>Selected links</h2>
+    <div class="stack">
+      <div><a href="https://scholar.google.com/citations?user=mvEAdH0AAAAJ">Google Scholar</a></div>
+      <div><a href="https://www.researchgate.net/profile/Tore-Hofstad">ResearchGate</a></div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section id="publications" class="pubs">
   <h2>Publications</h2>
   <ul>
     <li>Rugkåsa, J., Nyttingnes, O., Šaltytė Benth, J., Husum, T. L., Kjus, S. H. H., Wormdahl, I., ... &amp; Hatling, T. (2025). Can primary mental health services impact levels of involuntary admissions? A cluster-RCT of the ReCoN intervention. <i>Social Psychiatry and Psychiatric Epidemiology</i>, 1–11.</li>
@@ -74,10 +109,11 @@
   </ul>
 </section>
 
-<section>
-  <h2>Recent</h2>
-  <ul>
-    <li>Public defence (PhD): “Geographical Variation in Compulsory Hospitalisation in Norway 2014–2018” (Dec 9, 2022)</li>
-  </ul>
-</section>
+
+  <div class="rule"></div>
+
+  <footer class="muted" style="font-size:.9rem">© <span id="y"></span> Tore Hofstad</footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+</body>
 </html>
