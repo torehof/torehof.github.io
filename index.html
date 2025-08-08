@@ -84,12 +84,14 @@ header {
   }
 
   .card {
-    background: rgba(255, 255, 255, 0.92); /* semi-transparent to show gradient */
-    border-radius: 12px;
-    box-shadow: 0 2px 8px var(--shadow);
-    padding: 1rem 1.25rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow);
+  padding: 1rem 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #1e293b; /* enforce readable dark text */
+}
+
 
   .card:hover {
     transform: translateY(-2px);
