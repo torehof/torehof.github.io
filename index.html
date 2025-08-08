@@ -25,15 +25,22 @@
     color: var(--text);
   }
 
- header {
+header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 2rem max(5vw, 1rem);
-  background: linear-gradient(135deg, #0f766e, #115e59); /* gradient green */
+  background: linear-gradient(135deg, #0f766e, #0a4f4b); /* richer two-tone green */
   color: white;
 }
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: rgba(255, 255, 255, 0.92); /* stay light even in dark mode */
+  }
+}
+
 
   header h1 {
     font-family: 'Merriweather', serif;
