@@ -3,117 +3,147 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tore Hofstad</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet">
 <style>
   :root {
-    --max: 980px;
-    --accent: #0f766e; /* subtle teal accent */
+    --accent: #0f766e;
+    --bg1: #f8fafc;
+    --bg2: #ecfdf5;
+    --text: #0f172a;
+    --card: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.06);
   }
-  /* Light/dark auto */
   @media (prefers-color-scheme: dark) {
-    :root { --accent:#5eead4; }
-    body { background:#0b0f14; color:#e5e7eb; }
-    a { color: var(--accent); }
-    .muted { color:#9aa4af; }
-    .card { background:#0f1620; border-color:#1f2937; }
+    :root {
+      --accent: #5eead4;
+      --bg1: #0b0f14;
+      --bg2: #0f1620;
+      --text: #e5e7eb;
+      --card: #1f2937;
+      --shadow: rgba(0,0,0,0.4);
+    }
   }
-
-  /* Base */
-  body{margin:3rem auto;padding:0 1rem;max-width:var(--max);
-       font:16.5px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#0f172a}
-  h1{font-weight:700;letter-spacing:.02em;margin:0}
-  h2{margin:2rem 0 .75rem;font-size:1.1rem;text-transform:uppercase;letter-spacing:.06em}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .muted{color:#4b5563}
-  .rule{height:1px;background:linear-gradient(90deg,#ddd,transparent);margin:1.5rem 0}
-
-  /* Layout */
-  .header{display:grid;grid-template-columns:1fr;gap:1.25rem;align-items:center}
-  .lead{font-size:1.05rem}
-  .photo{
-    width:140px;height:140px;object-fit:cover;border-radius:50%;
-    box-shadow:0 2px 20px rgba(0,0,0,.08);border:1px solid #e5e7eb
+  body {
+    margin:0;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text);
+    background: linear-gradient(180deg, var(--bg1), var(--bg2));
   }
-  @media (min-width:860px){
-    .header{grid-template-columns:auto 180px}
-    .photo{width:160px;height:160px;justify-self:end}
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem max(5vw, 1rem);
+    background: var(--accent);
+    color: white;
   }
-
-  /* Nice cards for sections */
-  .card{border:1px solid #e5e7eb;border-radius:18px;padding:1rem 1.25rem}
-  .stack > * + *{margin-top:.6rem} /* vertical rhythm */
-
-  /* Publication list: one item per line, no bullets */
-  .pubs p{margin:.6rem 0}
+  header h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    margin: 0;
+  }
+  header p {
+    margin: .3rem 0;
+  }
+  .photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  main {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 2rem;
+  }
+  h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.3rem;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow);
+    padding: 1rem 1.25rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px var(--shadow);
+  }
+  .pubs p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 2rem 1rem;
+    color: var(--text);
+  }
 </style>
 
 <body>
-
-  <section class="header">
+  <header>
     <div>
       <h1>Tore Hofstad</h1>
-      <p class="muted">Guest researcher, Centre for Medical Ethics (CME), Institute of Health and Society (HELSAM), University of Oslo</p>
-      <p class="lead stack">
-        <span><a href="mailto:tore.hofstad@medisin.uio.no">tore.hofstad@medisin.uio.no</a></span>
-        <span><a href="https://www.med.uio.no/helsam/personer/vit/torehof/">UiO profile</a> · <a href="#">CV</a></span>
-      </p>
+      <p>Guest researcher, Centre for Medical Ethics (CME)</p>
+      <p>Institute of Health and Society (HELSAM), University of Oslo</p>
+      <p><a style="color:white;" href="mailto:tore.hofstad@medisin.uio.no">tore.hofstad@medisin.uio.no</a></p>
+      <p><a style="color:white;" href="https://www.med.uio.no/helsam/personer/vit/torehof/">UiO profile</a> · <a style="color:white;" href="#">CV</a></p>
     </div>
     <img class="photo" src="torehof.jpg" alt="Portrait of Tore Hofstad">
-  </section>
+  </header>
 
-  <div class="rule"></div>
+  <main>
+    <section class="card">
+      <h2>Research interests</h2>
+      <p>Coercion in mental health care</p>
+      <p>Geographical variation in health services</p>
+      <p>Statistical methods for causal inference</p>
+    </section>
 
-  <section class="card">
-    <h2>Research interests</h2>
-    <div class="stack">
-      <div>Coercion in mental health care</div>
-      <div>Geographical variation in health services</div>
-      <div>Statistical methods for causal inference</div>
-    </div>
-  </section>
+    <section class="card">
+      <h2>Selected links</h2>
+      <p><a href="https://scholar.google.com/citations?user=mvEAdH0AAAAJ">Google Scholar</a></p>
+      <p><a href="https://www.researchgate.net/profile/Tore-Hofstad">ResearchGate</a></p>
+    </section>
 
-  <div style="height:1rem"></div>
+    <section class="card pubs">
+      <h2>Publications</h2>
+      <p>Rugkåsa, J., Nyttingnes, O., Šaltytė Benth, J., Husum, T. L., Kjus, S. H. H., Wormdahl, I., ... &amp; Hatling, T. (2025). Can primary mental health services impact levels of involuntary admissions? A cluster-RCT of the ReCoN intervention. <i>Social Psychiatry and Psychiatric Epidemiology</i>, 1–11.</p>
+      <p>Hofstad, T., Nyttingnes, O., Bjelland, I., &amp; Mykletun, A. (2025). Catchment area characteristics do not account for geographical variation in ADHD diagnoses. <i>European Child &amp; Adolescent Psychiatry</i>, 1–7.</p>
+      <p>Hofstad, T., Nyttingnes, O., Markussen, S., Johnsen, E., Killackey, E., McDaid, D., ... &amp; Mykletun, A. (2023). Long term outcomes and causal modelling of compulsory inpatient and outpatient mental health care using Norwegian registry data: Protocol for a controversies in psychiatry research project. <i>International Journal of Methods in Psychiatric Research</i>, e1980.</li>
+      <p>Nyttingnes, O., Benth, J. Š., Hofstad, T., &amp; Rugkåsa, J. (2023). The relationship between area levels of involuntary psychiatric care and patient outcomes: a longitudinal national register study from Norway. <i>BMC Psychiatry</i>, 23(1), 112.<p>
+      <p>Hofstad, T. (2022). Geographical variation in compulsory hospitalisation in Norway 2014–2018. PhD-avhandling.<p>
+      <p>Hofstad, T., Husum, T. L., Rugkåsa, J., &amp; Hofmann, B. M. (2022). Geographical variation in compulsory hospitalisation–ethical challenges. <i>BMC Health Services Research</i>, 22(1), 1–12.<p>
+      <p>Hofstad, T., Rugkåsa, J., Ose, S.O., Nyttingnes, O., Kjus, S.H.H., and Husum, T.L. (2021), Service Characteristics and Geographical Variation in Compulsory Hospitalisation: An Exploratory Random Effects Within–Between Analysis of Norwegian Municipalities, 2015–2018. <i>Frontiers in Psychiatry</i>. <a href="https://doi.org/10.3389/fpsyt.2021.737698">https://doi.org/10.3389/fpsyt.2021.737698</a><p>
+      <p>Hofstad, T., Rugkåsa, J., Ose, S.O., Nyttingnes, O. and Husum, T.L. (2021), Measuring the level of compulsory hospitalisation in mental health care: The performance of different measures across areas and over time. <i>International Journal of Methods in Psychiatric Research</i>. e1881. <a href="https://doi.org/10.1002/mpr.1881">https://doi.org/10.1002/mpr.1881</a><p>
+      <p>Hofstad, T., Hampton, J. A., &amp; Hofmann, B. (2020). What Makes Some Diseases More Typical than Others? A Survey on the Impact of Disease Characteristics and Professional Background on Disease Typicality. <i>INQUIRY: The Journal of Health Care Organization, Provision, and Financing</i>. <a href="https://doi.org/10.1177/0046958020972813">https://doi.org/10.1177/0046958020972813</a><p>
+      <p>Hofstad, Tore (2019). QCA &amp; the Robustness range of calibration thresholds: how sensitive are solution terms to changing calibrations? . <i>COMPASSS Working Paper Series</i> 2019-92.<p>
+    </section>
+  </main>
 
-  <section class="card">
-    <h2>Selected links</h2>
-    <div class="stack">
-      <div><a href="https://scholar.google.com/citations?user=mvEAdH0AAAAJ">Google Scholar</a></div>
-      <div><a href="https://www.researchgate.net/profile/Tore-Hofstad">ResearchGate</a></div>
-    </div>
-  </section>
+  <footer>
+    © <span id="year"></span> Tore Hofstad
+  </footer>
 
-  <div class="rule"></div>
-
-  <section id="publications" class="pubs">
-  <h2>Publications</h2>
-  <ul>
-    <li>Rugkåsa, J., Nyttingnes, O., Šaltytė Benth, J., Husum, T. L., Kjus, S. H. H., Wormdahl, I., ... &amp; Hatling, T. (2025). Can primary mental health services impact levels of involuntary admissions? A cluster-RCT of the ReCoN intervention. <i>Social Psychiatry and Psychiatric Epidemiology</i>, 1–11.</li>
-
-    <li>Hofstad, T., Nyttingnes, O., Bjelland, I., &amp; Mykletun, A. (2025). Catchment area characteristics do not account for geographical variation in ADHD diagnoses. <i>European Child &amp; Adolescent Psychiatry</i>, 1–7.</li>
-
-    <li>Hofstad, T., Nyttingnes, O., Markussen, S., Johnsen, E., Killackey, E., McDaid, D., ... &amp; Mykletun, A. (2023). Long term outcomes and causal modelling of compulsory inpatient and outpatient mental health care using Norwegian registry data: Protocol for a controversies in psychiatry research project. <i>International Journal of Methods in Psychiatric Research</i>, e1980.</li>
-
-    <li>Nyttingnes, O., Benth, J. Š., Hofstad, T., &amp; Rugkåsa, J. (2023). The relationship between area levels of involuntary psychiatric care and patient outcomes: a longitudinal national register study from Norway. <i>BMC Psychiatry</i>, 23(1), 112.</li>
-
-    <li>Hofstad, T. (2022). Geographical variation in compulsory hospitalisation in Norway 2014–2018. PhD-avhandling.</li>
-
-    <li>Hofstad, T., Husum, T. L., Rugkåsa, J., &amp; Hofmann, B. M. (2022). Geographical variation in compulsory hospitalisation–ethical challenges. <i>BMC Health Services Research</i>, 22(1), 1–12.</li>
-
-    <li>Hofstad, T., Rugkåsa, J., Ose, S.O., Nyttingnes, O., Kjus, S.H.H., and Husum, T.L. (2021), Service Characteristics and Geographical Variation in Compulsory Hospitalisation: An Exploratory Random Effects Within–Between Analysis of Norwegian Municipalities, 2015–2018. <i>Frontiers in Psychiatry</i>. <a href="https://doi.org/10.3389/fpsyt.2021.737698">https://doi.org/10.3389/fpsyt.2021.737698</a></li>
-
-    <li>Hofstad, T., Rugkåsa, J., Ose, S.O., Nyttingnes, O. and Husum, T.L. (2021), Measuring the level of compulsory hospitalisation in mental health care: The performance of different measures across areas and over time. <i>International Journal of Methods in Psychiatric Research</i>. e1881. <a href="https://doi.org/10.1002/mpr.1881">https://doi.org/10.1002/mpr.1881</a></li>
-
-    <li>Hofstad, T., Hampton, J. A., &amp; Hofmann, B. (2020). What Makes Some Diseases More Typical than Others? A Survey on the Impact of Disease Characteristics and Professional Background on Disease Typicality. <i>INQUIRY: The Journal of Health Care Organization, Provision, and Financing</i>. <a href="https://doi.org/10.1177/0046958020972813">https://doi.org/10.1177/0046958020972813</a></li>
-
-    <li>Hofstad, Tore (2019). QCA &amp; the Robustness range of calibration thresholds: how sensitive are solution terms to changing calibrations? . <i>COMPASSS Working Paper Series</i> 2019-92.</li>
-  </ul>
-</section>
-
-
-  <div class="rule"></div>
-
-  <footer class="muted" style="font-size:.9rem">© <span id="y"></span> Tore Hofstad</footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
