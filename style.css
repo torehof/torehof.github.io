@@ -1,0 +1,86 @@
+:root {
+  --accent: #0f766e;
+  --bg1: #f8fafc;
+  --bg2: #ecfdf5;
+  --text: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --shadow: rgba(0, 0, 0, 0.06);
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg1), var(--bg2));
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem max(5vw, 1rem);
+  background: linear-gradient(135deg, #0f766e, #0a4f4b, #0d9488);
+  background-size: 200% 200%;
+  color: white;
+}
+
+header h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 3px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+main {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.3rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow);
+  padding: 1rem 1.25rem;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 2rem 1rem;
+  color: var(--text);
+}
