@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRE2DUP Antipsychotic Package Parameters</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111827;
+        --panel: #1f2937;
+        --text: #f9fafb;
+        --muted: #9ca3af;
+        --accent: #60a5fa;
+        --border: #374151;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      margin-bottom: 0.25rem;
+      font-size: 1.7rem;
+    }
+    .sub {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .controls,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+    .controls {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 0.65rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: inherit;
+      box-sizing: border-box;
+    }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .btn-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th,
+    td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0.45rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      width: 35%;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .empty {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>PRE2DUP Antipsychotic Package Parameters</h1>
+    <p class="sub">Browse medication package parameter rows by ATC code and medication name.</p>
+
+    <section class="controls" aria-label="Selection controls">
+      <div>
+        <label for="searchInput">Search medication (ATC name/code)</label>
+        <input id="searchInput" type="search" placeholder="Type to filter options..." autocomplete="off" />
+      </div>
+      <div>
+        <label for="medSelect">Medication selection</label>
+        <select id="medSelect"></select>
+      </div>
+    </section>
+
+    <section class="panel" aria-live="polite">
+      <div class="toolbar">
+        <strong id="selectionTitle">No medication selected</strong>
+        <a class="btn-link" href="data/meds.csv" download>Download CSV</a>
+      </div>
+      <div id="selectionMeta" class="meta"></div>
+      <div id="parameterPanel" class="empty">Loading data...</div>
+    </section>
+  </main>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const medSelect = document.getElementById('medSelect');
+    const parameterPanel = document.getElementById('parameterPanel');
+    const selectionTitle = document.getElementById('selectionTitle');
+    const selectionMeta = document.getElementById('selectionMeta');
+
+    let allRows = [];
+    let filteredRows = [];
+
+    function normalize(value) {
+      return String(value ?? '').toLowerCase();
+    }
+
+    function labelForRow(row) {
+      const name = row.ATC_name || 'Unnamed medication';
+      const code = row.ATC || 'No ATC';
+      return `${name} (${code})`;
+    }
+
+    function applyFilter() {
+      const query = normalize(searchInput.value.trim());
+      filteredRows = allRows.filter((row) => {
+        if (!query) return true;
+        return normalize(row.ATC_name).includes(query) || normalize(row.ATC).includes(query);
+      });
+
+      medSelect.innerHTML = '';
+
+      if (filteredRows.length === 0) {
+        const option = document.createElement('option');
+        option.textContent = 'No matching medications';
+        option.value = '';
+        medSelect.appendChild(option);
+        renderSelection(null);
+        return;
+      }
+
+      filteredRows.forEach((row, index) => {
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = labelForRow(row);
+        medSelect.appendChild(option);
+      });
+
+      renderSelection(filteredRows[0]);
+    }
+
+    function renderSelection(row) {
+      if (!row) {
+        selectionTitle.textContent = 'No medication selected';
+        selectionMeta.textContent = '';
+        parameterPanel.innerHTML = '<p class="empty">No data to display.</p>';
+        return;
+      }
+
+      selectionTitle.textContent = row.ATC_name || 'Unnamed medication';
+      selectionMeta.textContent = `ATC: ${row.ATC || 'N/A'}`;
+
+      const preferredOrder = [
+        'ATC_name',
+        'ATC',
+        'strength',
+        'form',
+        'package_size',
+        'DDD',
+        'max_daily_dose',
+        'min_daily_dose'
+      ];
+
+      const keys = Object.keys(row);
+      keys.sort((a, b) => {
+        const aIdx = preferredOrder.indexOf(a);
+        const bIdx = preferredOrder.indexOf(b);
+        if (aIdx !== -1 || bIdx !== -1) {
+          return (aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx) - (bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx);
+        }
+        return a.localeCompare(b);
+      });
+
+      const tableRows = keys.map((key) => {
+        const value = row[key] === null || row[key] === undefined || row[key] === '' ? '—' : String(row[key]);
+        return `<tr><th scope="row">${key}</th><td>${value}</td></tr>`;
+      }).join('');
+
+      parameterPanel.innerHTML = `<table aria-label="Medication parameters"><tbody>${tableRows}</tbody></table>`;
+    }
+
+    medSelect.addEventListener('change', () => {
+      const idx = Number(medSelect.value);
+      renderSelection(Number.isNaN(idx) ? null : filteredRows[idx]);
+    });
+
+    searchInput.addEventListener('input', applyFilter);
+
+    fetch('data/meds.json')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (!Array.isArray(data)) {
+          throw new Error('Expected array of medication rows in JSON.');
+        }
+        allRows = data;
+        applyFilter();
+      })
+      .catch((error) => {
+        selectionTitle.textContent = 'Failed to load data';
+        selectionMeta.textContent = '';
+        parameterPanel.innerHTML = `<p class="empty">Could not load <code>data/meds.json</code>: ${error.message}</p>`;
+      });
+  </script>
+</body>
+</html>
