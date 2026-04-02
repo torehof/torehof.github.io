@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building a band timeline with ggplot2</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .tutorial-img {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: block;
+      margin: 1rem auto;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tore Hofstad</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="other.html">Other Interests</a>
+      <a href="ggplot-band-timeline.html">ggplot2 Tutorial</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <a class="back-link" href="index.html">← Back to homepage</a>
+      <h2>Building a band timeline with ggplot2</h2>
+
+      <div class="card">
+        <p>
+          This tutorial shows how to build a Gantt-style band timeline in <code>ggplot2</code>.
+          The plot combines thick rounded segments for band membership, a custom dark theme,
+          and album covers placed on the x-axis using <code>ggtext::element_markdown()</code>.
+        </p>
+
+        <p>
+          The main ideas are:
+        </p>
+        <ul>
+          <li>use one row per member period;</li>
+          <li>plot membership as horizontal segments;</li>
+          <li>style the figure with a custom theme;</li>
+          <li>use HTML image labels for album covers on the axis.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Finished figure</h2>
+      <div class="card">
+        <p>
+          Save your finished plot as an image and place it in the repository, for example in
+          <code>images/ping-members-albums.png</code>.
+        </p>
+        <img src="images/ping-members-albums.png" alt="Band timeline made with ggplot2" class="tutorial-img">
+      </div>
+    </section>
+
+    <section>
+      <h2>Code</h2>
+      <div class="card">
+<pre><code>library(data.table)
+library(ggplot2)
+library(ggtext)
+library(grid)
+
+band <- data.table(
+  member = c(
+    "Jørgen Greiner", "Mattis Janitz", "Tore Hofstad",
+    "Alexander Lindbäck", "Hans Fredheim", "Claes Terjesen",
+    "Thomas Haugbro", "Roald Madland", "Per Erik Tørfoss",
+    "Mats Monstad", "Bjørn Arne Johansen"
+  ),
+  instrument = c(
+    "Bass/vocal", "Guitar", "Keyboards",
+    "Drums", "Keyboards", "Drums",
+    "Guitar", "Keyboards", "Drums",
+    "Drums", "Guitar"
+  ),
+  start = as.Date(c(
+    "1998-09-01", "1998-09-01", "1999-01-01",
+    "2000-01-01", "2001-01-01", "2006-01-01",
+    "2009-01-01", "2013-01-01", "2015-01-01",
+    "2017-01-01", "2019-01-01"
+  )),
+  end = as.Date(c(
+    "2022-01-01", "2022-01-01", "2022-01-01",
+    "2006-01-01", "2009-01-01", "2015-01-01",
+    "2016-01-01", "2022-01-01", "2016-01-01",
+    "2022-01-01", "2022-01-01"
+  ))
+)
+
+current_members <- c(
+  "Jørgen Greiner", "Mattis Janitz", "Tore Hofstad",
+  "Roald Madland", "Mats Monstad", "Bjørn Arne Johansen"
+)
+
+band[member %in% current_members, end := as.Date("2026-04-01")]
+
+band[, member := factor(member, levels = rev(member))]
+band[, instrument := factor(
+  instrument,
+  levels = c("Bass/vocal", "Guitar", "Keyboards", "Drums")
+)]
+
+album_breaks <- as.Date(c(
+  "2000-01-01", "2005-01-01", "2008-01-01",
+  "2012-01-01", "2020-01-01", "2025-01-01"
+))
+
+album_urls <- c(
+  "https://www.thepingpage.com/wp-content/2008/02/its_a_picnic.jpg",
+  "https://www.thepingpage.com/wp-content/2008/02/the_castle_massacre.jpg",
+  "https://www.thepingpage.com/wp-content/uploads/waf012_ping_front-mini3.jpg",
+  "https://www.thepingpage.com/wp-content/uploads/Hurricane_front_1000.jpg",
+  "https://www.thepingpage.com/wp-content/uploads/ZigZag.jpg",
+  "https://usercontent.one/wp/www.thepingpage.com/wp-content/uploads/PING_Songs_From_The_Nebula_4000x4000px-1536x1536.jpg"
+)
+
+album_labels <- sprintf("&lt;img src='%s' width='85' /&gt;&lt;br&gt;", album_urls)
+
+cols <- c(
+  "Bass/vocal" = "#b9721d",
+  "Guitar"     = "#dcc27a",
+  "Keyboards"  = "#86d0aa",
+  "Drums"      = "#009a99"
+)
+
+ping_dark_theme <- function(base_size = 18, base_family = "serif") {
+  theme_minimal(base_size = base_size, base_family = base_family) +
+    theme(
+      plot.background = element_rect(fill = "#1b1b1d", colour = NA),
+      panel.background = element_rect(fill = "#1b1b1d", colour = NA),
+      panel.grid.major.x = element_line(colour = "#35353a", linewidth = 0.5),
+      panel.grid.major.y = element_line(colour = "#313138", linewidth = 0.5),
+      panel.grid.minor = element_blank(),
+      axis.title = element_blank(),
+      axis.text.y = element_text(colour = "grey92"),
+      axis.text.x.bottom = ggtext::element_markdown(
+        colour = "grey92",
+        margin = margin(t = 4)
+      ),
+      axis.text.x.top = element_text(
+        colour = "grey75",
+        margin = margin(b = 10)
+      ),
+      axis.ticks = element_blank(),
+      plot.title = element_text(colour = "white", face = "bold", size = rel(1.5)),
+      plot.subtitle = element_text(colour = "grey90"),
+      plot.caption = element_text(colour = "grey75", hjust = 1),
+      legend.position = "top",
+      legend.justification = "center",
+      legend.background = element_rect(fill = "#1b1b1d", colour = NA),
+      legend.key = element_rect(fill = "#1b1b1d", colour = NA),
+      legend.text = element_text(colour = "grey90"),
+      legend.title = element_blank(),
+      legend.key.width = unit(1.5, "cm"),
+      plot.margin = margin(20, 28, 55, 20)
+    )
+}
+
+p <- ggplot(
+  band,
+  aes(
+    x = start, xend = end,
+    y = member, yend = member,
+    colour = instrument
+  )
+) +
+  geom_segment(linewidth = 10, lineend = "round") +
+  labs(
+    title = "Ping",
+    subtitle = "Members & Albums",
+    caption = "www.thepingpage.com"
+  ) +
+  scale_colour_manual(values = cols) +
+  scale_x_date(
+    breaks = album_breaks,
+    labels = album_labels,
+    sec.axis = sec_axis(
+      ~ .,
+      breaks = album_breaks,
+      labels = format(album_breaks, "%Y")
+    )
+  ) +
+  coord_cartesian(
+    xlim = c(as.Date("1998-09-01"), as.Date("2026-04-01")),
+    clip = "off"
+  ) +
+  ping_dark_theme()
+
+p</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Notes</h2>
+      <div class="card">
+        <p>
+          This palette was chosen to fit the figure. It is reasonably accessible, but not a formally
+          colourblind-safe palette. For general categorical plots, a palette designed specifically for
+          accessibility is often a better choice.
+        </p>
+        <p>
+          A useful trick here is that <code>geom_segment()</code> is simpler than reshaping the data and
+          drawing lines from separate start and end rows.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © Tore Hofstad
+  </footer>
+</body>
+</html>
