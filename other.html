@@ -5,7 +5,6 @@
 <title>Other Interests - Tore Hofstad</title>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 <body>
   <header>
     <div>
@@ -17,14 +16,19 @@
       <a href="other.html">Other Interests</a>
     </nav>
   </header>
-
   <main>
     <section class="card">
       <h2>Music</h2>
       <p>Beyond research, I am an active musician in <a href="http://www.thepingpage.com" target="_blank">Ping</a>. Our new album Songs from the Nebula can be heard <a href="https://orcd.co/ping-nebula" target="_blank">here</a>.</p>
     </section>
+    <section class="card">
+      <h2>Film</h2>
+      <p>I am a lifelong cinephile with a particular interest in world cinema and film history. When the British Film Institute published the results of their 2022 <em>Sight &amp; Sound</em> Greatest Films poll — the most comprehensive survey of critical opinion in cinema, with over 2,000 voters — I wanted a better way to explore the data than a static list.</p>
+      <p>The result is an interactive Shiny app built in R, covering all 21,000+ ballot entries across 4,500+ unique films. It lets you browse the full rankings, explore individual voter ballots, filter by decade, country, or genre, and even build your own top-10 list and find your closest taste twin among the real voters.</p>
+      <p>The app was also an exercise in what is possible with R and Shiny for data visualisation. I built it with assistance from <a href="https://claude.ai" target="_blank">Claude</a>, and the full source code is available inside the app itself — so if you want to build something similar, you can use it as a starting point.</p>
+      <p><a href="https://tore-hofstad.shinyapps.io/sight_and_sound/" target="_blank">Explore the Sight &amp; Sound 2022 rankings →</a></p>
+    </section>
   </main>
-
   <footer>© <span id="year"></span> Tore Hofstad</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
