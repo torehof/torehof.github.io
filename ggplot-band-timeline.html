@@ -6,31 +6,65 @@
   <title>Building a band timeline with ggplot2</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    pre {
-      background: #0f172a;
-      color: #e5e7eb;
-      padding: 1rem;
-      border-radius: 12px;
-      overflow-x: auto;
-      font-size: 0.95rem;
-      line-height: 1.45;
+  pre {
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 1rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .figure-showcase {
+    width: min(1500px, calc(100vw - 2rem));
+    margin: 0 auto;
+  }
+
+  .figure-card {
+    padding: 1rem;
+  }
+
+  .figure-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .tutorial-img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    display: block;
+    margin: 0 auto;
+  }
+
+  .figure-note {
+    margin-top: 0.85rem;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 700px) {
+    .figure-showcase {
+      width: calc(100vw - 1rem);
     }
-    code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    .figure-card {
+      padding: 0.5rem;
     }
-    .tutorial-img {
-      width: 100%;
-      max-width: 900px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      display: block;
-      margin: 1rem auto;
-    }
-    .back-link {
-      display: inline-block;
-      margin-bottom: 1rem;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <header>
@@ -67,12 +101,21 @@
       </div>
     </section>
 
-    <section>
-      <h2>Finished figure</h2>
-      <div class="card">
-       <img src="images/ping-members-albums.png" alt="Band timeline made with ggplot2" class="tutorial-img">
-      </div>
-    </section>
+    <section class="figure-showcase">
+  <h2>Finished figure</h2>
+  <div class="card figure-card">
+    <a href="images/ping-members-albums.png" target="_blank" rel="noopener" class="figure-link">
+      <img src="images/ping-members-albums.png"
+           alt="Band timeline made with ggplot2"
+           class="tutorial-img">
+    </a>
+    <p class="figure-note">
+      <a href="images/ping-members-albums.png" target="_blank" rel="noopener">
+        Click the figure to open a larger version
+      </a>
+    </p>
+  </div>
+</section>
 
     <section>
       <h2>Code</h2>
