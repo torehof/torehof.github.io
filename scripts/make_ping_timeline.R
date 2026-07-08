@@ -68,7 +68,7 @@ cols <- c(
   "Drums"      = "#009a99"
 )
 
-ping_dark_theme <- function(base_size = 18, base_family = "DejaVu Serif") {
+ping_dark_theme <- function(base_size = 18, base_family = "serif") {
   theme_minimal(base_size = base_size, base_family = base_family) +
     theme(
       plot.background = element_rect(fill = "#1b1b1d", colour = NA),
@@ -109,7 +109,7 @@ p <- ggplot(
     colour = instrument
   )
 ) +
-  geom_segment(linewidth = 7, lineend = "round") +
+  geom_segment(linewidth = 5, lineend = "round") +
   labs(
     title = "Ping",
     subtitle = "Members & Albums",
