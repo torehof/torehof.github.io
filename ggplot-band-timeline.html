@@ -157,7 +157,9 @@ current_members <- c(
   "Roald Madland", "Mats Monstad", "Bjørn Arne Johansen"
 )
 
-band[member %in% current_members, end := as.Date("2026-04-01")]
+current_end <- Sys.Date()
+
+band[member %in% current_members, end := current_end]
 
 band[, member := factor(member, levels = rev(member))]
 band[, instrument := factor(
@@ -246,9 +248,9 @@ p <- ggplot(
     )
   ) +
   coord_cartesian(
-    xlim = c(as.Date("1998-09-01"), as.Date("2026-04-01")),
-    clip = "off"
-  ) +
+  xlim = c(as.Date("1998-09-01"), current_end),
+  clip = "off"
+)  +
   ping_dark_theme()
 
 p</code></pre>
