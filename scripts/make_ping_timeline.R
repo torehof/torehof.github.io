@@ -59,7 +59,7 @@ album_urls <- c(
   "https://usercontent.one/wp/www.thepingpage.com/wp-content/uploads/PING_Songs_From_The_Nebula_4000x4000px-1536x1536.jpg"
 )
 
-album_labels <- sprintf("<img src='%s' width='85' /><br>", album_urls)
+album_labels <- sprintf("<img src='%s' width='65' /><br>", album_urls)
 
 cols <- c(
   "Bass/vocal" = "#b9721d",
@@ -68,7 +68,7 @@ cols <- c(
   "Drums"      = "#009a99"
 )
 
-ping_dark_theme <- function(base_size = 18, base_family = "serif") {
+ping_dark_theme <- function(base_size = 18, base_family = "DejaVu Serif") {
   theme_minimal(base_size = base_size, base_family = base_family) +
     theme(
       plot.background = element_rect(fill = "#1b1b1d", colour = NA),
@@ -96,8 +96,8 @@ ping_dark_theme <- function(base_size = 18, base_family = "serif") {
       legend.key = element_rect(fill = "#1b1b1d", colour = NA),
       legend.text = element_text(colour = "grey90"),
       legend.title = element_blank(),
-      legend.key.width = unit(1.5, "cm"),
-      plot.margin = margin(20, 28, 55, 20)
+      legend.key.width = unit(1.1, "cm"),
+      plot.margin = margin(16, 24, 42, 16)
     )
 }
 
@@ -109,7 +109,7 @@ p <- ggplot(
     colour = instrument
   )
 ) +
-  geom_segment(linewidth = 10, lineend = "round") +
+  geom_segment(linewidth = 7, lineend = "round") +
   labs(
     title = "Ping",
     subtitle = "Members & Albums",
@@ -136,8 +136,8 @@ dir.create("images", showWarnings = FALSE)
 ggsave(
   filename = "images/ping-members-albums.png",
   plot = p,
-  width = 12,
-  height = 6.75,
+  width = 13,
+  height = 6.2,
   dpi = 200,
   bg = "#1b1b1d"
 )
