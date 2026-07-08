@@ -181,7 +181,7 @@ album_urls <- c(
   "https://usercontent.one/wp/www.thepingpage.com/wp-content/uploads/PING_Songs_From_The_Nebula_4000x4000px-1536x1536.jpg"
 )
 
-album_labels <- sprintf("&lt;img src='%s' width='85' /&gt;&lt;br&gt;", album_urls)
+album_labels <- sprintf("<img src='%s' width='65' /><br>", album_urls)
 
 cols <- c(
   "Bass/vocal" = "#b9721d",
@@ -218,8 +218,8 @@ ping_dark_theme <- function(base_size = 18, base_family = "serif") {
       legend.key = element_rect(fill = "#1b1b1d", colour = NA),
       legend.text = element_text(colour = "grey90"),
       legend.title = element_blank(),
-      legend.key.width = unit(1.5, "cm"),
-      plot.margin = margin(20, 28, 55, 20)
+      legend.key.width = unit(1.1, "cm"),
+      plot.margin = margin(16, 24, 42, 16)
     )
 }
 
@@ -231,7 +231,7 @@ p <- ggplot(
     colour = instrument
   )
 ) +
-  geom_segment(linewidth = 10, lineend = "round") +
+  geom_segment(linewidth = 5, lineend = "round") +
   labs(
     title = "Ping",
     subtitle = "Members & Albums",
@@ -248,9 +248,9 @@ p <- ggplot(
     )
   ) +
   coord_cartesian(
-  xlim = c(as.Date("1998-09-01"), current_end),
-  clip = "off"
-)  +
+    xlim = c(as.Date("1998-09-01"), current_end),
+    clip = "off"
+  ) +
   ping_dark_theme()
 
 p</code></pre>
