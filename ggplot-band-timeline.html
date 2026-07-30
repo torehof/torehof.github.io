@@ -177,16 +177,29 @@ album_breaks <- as.Date(c(
   "2012-01-01", "2020-01-01", "2025-01-01"
 ))
 
-album_urls <- c(
-  "https://www.thepingpage.com/wp-content/2008/02/its_a_picnic.jpg",
-  "https://www.thepingpage.com/wp-content/2008/02/the_castle_massacre.jpg",
-  "https://www.thepingpage.com/wp-content/uploads/waf012_ping_front-mini3.jpg",
-  "https://www.thepingpage.com/wp-content/uploads/Hurricane_front_1000.jpg",
-  "https://www.thepingpage.com/wp-content/uploads/ZigZag.jpg",
-  "https://usercontent.one/wp/www.thepingpage.com/wp-content/uploads/PING_Songs_From_The_Nebula_4000x4000px-1536x1536.jpg"
+album_files <- file.path(
+  "images",
+  "album-covers",
+  c(
+    "its_a_picnic.jpg",
+    "the_castle_massacre.jpg",
+    "discotheque.jpg",
+    "Hurricane.jpg",
+    "ZigZag.jpg",
+    "PING_Songs_From_The_Nebula.jpg"
+  )
 )
 
-album_labels <- sprintf("<img src='%s' width='65' /><br>", album_urls)
+stopifnot(all(file.exists(album_files)))
+
+album_labels <- sprintf(
+  "<img src='%s' width='65' /><br>",
+  normalizePath(
+    album_files,
+    winslash = "/",
+    mustWork = TRUE
+  )
+)
 
 cols <- c(
   "Bass/vocal" = "#b9721d",
