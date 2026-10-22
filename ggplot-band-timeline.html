@@ -1,136 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Building a band timeline with ggplot2</title>
+  <title>Building a band timeline with ggplot2 | Tore Hofstad</title>
+  <meta name="description" content="A worked R and ggplot2 example: create a band timeline with membership periods, a custom dark theme and album-cover axis labels.">
+  <meta name="author" content="Tore Hofstad">
+  <link rel="canonical" href="https://torehof.github.io/ggplot-band-timeline.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Building a band timeline with ggplot2 | Tore Hofstad">
+  <meta property="og:description" content="A worked R and ggplot2 example: create a band timeline with membership periods, a custom dark theme and album-cover axis labels.">
+  <meta property="og:url" content="https://torehof.github.io/ggplot-band-timeline.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-  pre {
-    background: #0f172a;
-    color: #e5e7eb;
-    padding: 1rem;
-    border-radius: 12px;
-    overflow-x: auto;
-    font-size: 0.95rem;
-    line-height: 1.45;
-  }
-
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  }
-
-  .back-link {
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-
-  .figure-showcase {
-    width: min(1500px, calc(100vw - 2rem));
-    margin: 0 auto;
-  }
-
-  .figure-card {
-    padding: 1rem;
-  }
-
-  .figure-link {
-    display: block;
-    text-decoration: none;
-  }
-
-  .tutorial-img {
-    width: 100%;
-    max-width: none;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
-    display: block;
-    margin: 0 auto;
-  }
-
-  .figure-note {
-    margin-top: 0.85rem;
-    text-align: center;
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 700px) {
-    .figure-showcase {
-      width: calc(100vw - 1rem);
-    }
-
-    .figure-card {
-      padding: 0.5rem;
-    }
-  }
-</style>
 </head>
 <body>
-  <header>
-    <h1>Tore Hofstad</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-      <a href="other.html">Other Interests</a>
-      <a href="ggplot-band-timeline.html">ggplot2 Tutorial</a>
-    </nav>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="identity">
+        <a class="site-name" href="index.html">Tore Hofstad</a>
+        <h1>ggplot2 Tutorial</h1>
+      </div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="other.html">Other Interests</a>
+        <a href="ggplot-band-timeline.html" aria-current="page">ggplot2 Tutorial</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section>
-      <a class="back-link" href="index.html">← Back to homepage</a>
-      <h2>Building a band timeline with ggplot2</h2>
-
-      <div class="card">
-        <p>
-          This tutorial shows how to build a Gantt-style band timeline in <code>ggplot2</code>.
-          The plot combines thick rounded segments for band membership, a custom dark theme,
-          and album covers placed on the x-axis using <code>ggtext::element_markdown()</code>.
-        </p>
-
-        <p>
-          The main ideas are:
-        </p>
-        <ul>
-          <li>use one row per member period;</li>
-          <li>plot membership as horizontal segments;</li>
-          <li>style the figure with a custom theme;</li>
-          <li>use HTML image labels for album covers on the axis.</li>
-        </ul>
-        <p>
-  <code>Sys.Date()</code> returns today’s date when the R code is run. Here it is used
-  as the end date for current band members, so the timeline can be updated automatically
-  when the figure is regenerated.
-        </p>
-      </div>
+  <main id="main-content" tabindex="-1">
+    <section class="card" aria-labelledby="tutorial-heading">
+      <h2 id="tutorial-heading">Building a band timeline with ggplot2</h2>
+      <p>This tutorial shows how to build a Gantt-style band timeline in <code>ggplot2</code>. The plot combines thick rounded segments for band membership, a custom dark theme, and album covers placed on the x-axis using <code>ggtext::element_markdown()</code>.</p>
+      <p>The main ideas are:</p>
+      <ul>
+        <li>use one row per member period;</li>
+        <li>plot membership as horizontal segments;</li>
+        <li>style the figure with a custom theme;</li>
+        <li>use HTML image labels for album covers on the axis.</li>
+      </ul>
+      <p><code>Sys.Date()</code> returns today’s date when the R code is run. Here it is used as the end date for current band members, so the timeline can be updated automatically when the figure is regenerated.</p>
     </section>
 
-    <section class="figure-showcase">
-  <h2>Finished figure</h2>
-  <div class="card figure-card">
-    <a href="images/ping-members-albums.png" target="_blank" rel="noopener" class="figure-link">
-      <img src="images/ping-members-albums.png"
-           alt="Band timeline made with ggplot2"
-           class="tutorial-img">
-    </a>
-    <p class="figure-note">
-      <a href="images/ping-members-albums.png" target="_blank" rel="noopener">
-        Click the figure to open a larger version
-      </a>
-    </p>
-  </div>
-</section>
+    <section class="card figure-showcase" aria-labelledby="figure-heading">
+      <h2 id="figure-heading">Finished figure</h2>
+      <figure>
+        <a href="images/ping-members-albums.png" target="_blank" rel="noopener noreferrer" class="figure-link">
+          <img src="images/ping-members-albums.png" alt="Timeline of Ping’s band members and instruments, with album covers marking the release years" class="tutorial-img" loading="lazy" decoding="async">
+        </a>
+        <figcaption><a href="images/ping-members-albums.png" target="_blank" rel="noopener noreferrer">Open the full-size figure in a new tab <span aria-hidden="true">↗</span></a></figcaption>
+      </figure>
+    </section>
 
-    <section>
-      <h2>Code</h2>
-      <div class="card">
-<pre><code>library(data.table)
+    <section class="card" aria-labelledby="code-heading">
+      <h2 id="code-heading">Code</h2>
+      <p>The example uses album covers in an <code>images/album-covers</code> folder. These are available in <a href="https://github.com/torehof/torehof.github.io/tree/main/images/album-covers">the website repository</a>.</p>
+      <pre class="code-block" tabindex="0" aria-label="R code for the band timeline; scroll horizontally for long lines"><code>library(data.table)
 library(ggplot2)
 library(ggtext)
 library(grid)
 
-band <- data.table(
+band &lt;- data.table(
   member = c(
     "Jørgen Greiner", "Mattis Janitz", "Tore Hofstad",
     "Alexander Lindbäck", "Hans Fredheim", "Claes Terjesen",
@@ -157,12 +92,12 @@ band <- data.table(
   ))
 )
 
-current_members <- c(
+current_members &lt;- c(
   "Jørgen Greiner", "Mattis Janitz", "Tore Hofstad",
   "Roald Madland", "Mats Monstad", "Bjørn Arne Johansen"
 )
 
-current_end <- Sys.Date()
+current_end &lt;- Sys.Date()
 
 band[member %in% current_members, end := current_end]
 
@@ -172,12 +107,12 @@ band[, instrument := factor(
   levels = c("Bass/vocal", "Guitar", "Keyboards", "Drums")
 )]
 
-album_breaks <- as.Date(c(
+album_breaks &lt;- as.Date(c(
   "2000-01-01", "2005-01-01", "2008-01-01",
   "2012-01-01", "2020-01-01", "2025-01-01"
 ))
 
-album_files <- file.path(
+album_files &lt;- file.path(
   "images",
   "album-covers",
   c(
@@ -192,8 +127,8 @@ album_files <- file.path(
 
 stopifnot(all(file.exists(album_files)))
 
-album_labels <- sprintf(
-  "<img src='%s' width='65' /><br>",
+album_labels &lt;- sprintf(
+  "&lt;img src='%s' width='65' /&gt;&lt;br&gt;",
   normalizePath(
     album_files,
     winslash = "/",
@@ -201,14 +136,14 @@ album_labels <- sprintf(
   )
 )
 
-cols <- c(
+cols &lt;- c(
   "Bass/vocal" = "#b9721d",
   "Guitar"     = "#dcc27a",
   "Keyboards"  = "#86d0aa",
   "Drums"      = "#009a99"
 )
 
-ping_dark_theme <- function(base_size = 18, base_family = "serif") {
+ping_dark_theme &lt;- function(base_size = 18, base_family = "serif") {
   theme_minimal(base_size = base_size, base_family = base_family) +
     theme(
       plot.background = element_rect(fill = "#1b1b1d", colour = NA),
@@ -241,7 +176,7 @@ ping_dark_theme <- function(base_size = 18, base_family = "serif") {
     )
 }
 
-p <- ggplot(
+p &lt;- ggplot(
   band,
   aes(
     x = start, xend = end,
@@ -252,7 +187,7 @@ p <- ggplot(
   geom_segment(linewidth = 5, lineend = "round") +
   labs(
     title = "Ping",
-    subtitle = "Members & Albums",
+    subtitle = "Members &amp; Albums",
     caption = "www.thepingpage.com"
   ) +
   scale_colour_manual(values = cols) +
@@ -272,23 +207,15 @@ p <- ggplot(
   ping_dark_theme()
 
 p</code></pre>
-      </div>
     </section>
 
-    <section>
-      <h2>Notes</h2>
-      <div class="card">
-        <p>
-          This palette was chosen to fit the figure. It is reasonably accessible, but not a formally
-          colourblind-safe palette. For general categorical plots, a palette designed specifically for
-          accessibility is often a better choice.
-        </p>
-       </div>
+    <section class="card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">Notes</h2>
+      <p>This palette was chosen to fit the figure. It is reasonably accessible, but not a formally colourblind-safe palette. For general categorical plots, a palette designed specifically for accessibility is often a better choice.</p>
     </section>
   </main>
 
-  <footer>
-    © Tore Hofstad
-  </footer>
+  <footer class="site-footer">© <span id="year">2026</span> Tore Hofstad</footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

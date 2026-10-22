@@ -2,35 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tore Hofstad</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tore Hofstad | Mental health care research</title>
+  <meta name="description" content="Mental health care research, nationwide registry studies and causal inference. Research, publications, music, film and R tutorials by Tore Hofstad.">
+  <meta name="author" content="Tore Hofstad">
+  <link rel="canonical" href="https://torehof.github.io/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tore Hofstad | Mental health care research">
+  <meta property="og:description" content="Mental health care research, nationwide registry studies and causal inference. Research, publications, music, film and R tutorials by Tore Hofstad.">
+  <meta property="og:url" content="https://torehof.github.io/index.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <script data-goatcounter="https://torehof.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
-  <header>
-    <div>
-      <h1>Tore Hofstad</h1>
-      <p>Researcher at <a style="color:white;" href="https://www.helse-bergen.no/avdelinger/psykisk-helsevern/forskingsavdelinga-divisjon-psykisk-helsevern/populasjonshelse/">Centre for Population Health</a>, Haukeland University Hospital</p>
-      <p>Guest researcher at <a style="color:white;" href="https://www.med.uio.no/helsam/om/organisasjon/avdelinger/sme/">Centre for Medical Ethics</a>, University of Oslo</p>
+          async src="https://gc.zgo.at/count.js"></script>
+  <header class="site-header home-header">
+    <div class="header-inner">
+      <div class="identity">
+        <h1>Tore Hofstad</h1>
+        <p>Researcher at <a href="https://www.helse-bergen.no/avdelinger/psykisk-helsevern/forskingsavdelinga-divisjon-psykisk-helsevern/populasjonshelse/">Centre for Population Health</a>,<br class="desktop-break"> Haukeland University Hospital</p>
+        <p>Guest researcher at <a href="https://www.med.uio.no/helsam/om/organisasjon/avdelinger/sme/">Centre for Medical Ethics</a>,<br class="desktop-break"> University of Oslo</p>
+      </div>
+      <img class="photo" src="profilbilde_tore.jpg" width="150" height="150" alt="Portrait of Tore Hofstad">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="research.html">Research</a>
+        <a href="other.html">Other Interests</a>
+        <a href="ggplot-band-timeline.html">ggplot2 Tutorial</a>
+      </nav>
     </div>
-    <img class="photo" src="profilbilde_tore.jpg" alt="Portrait of Tore Hofstad">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-      <a href="other.html">Other Interests</a>
-      <a href="ggplot-band-timeline.html">ggplot2 Tutorial</a>
-    </nav>
   </header>
-  <main>
-    <section class="card">
-      <h2>About Me</h2>
-      <p>I am a mental health care researcher with a focus on geographical variation in health services, coercion in psychiatry, and causal inference methods. I work primarily with large-scale registry data in R.</p>
-      <p><a href="mailto:tore.hofstad@medisin.uio.no">tore.hofstad@medisin.uio.no</a> | <a href="https://scholar.google.com/citations?user=mvEAdH0AAAAJ">Google Scholar</a> | <a href="https://www.researchgate.net/profile/Tore-Hofstad">ResearchGate</a> | <a href="https://www.med.uio.no/helsam/personer/vit/torehof/">UiO profile</a></p>
+
+  <main id="main-content" tabindex="-1">
+    <section class="card" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p class="intro">I study how mental health services vary, who receives treatment, and how people fare over time. My research combines nationwide registry data and causal inference methods, with a particular focus on compulsory mental health care and neurodevelopmental disorders.</p>
+      <p>I work primarily in R, with an interest in data visualisation and research methods.</p>
+      <ul class="profile-links" aria-label="Contact and professional profiles">
+        <li><a href="mailto:tore.hofstad@medisin.uio.no">tore.hofstad@medisin.uio.no</a></li>
+        <li><a href="https://scholar.google.com/citations?user=mvEAdH0AAAAJ">Google Scholar</a></li>
+        <li><a href="https://www.researchgate.net/profile/Tore-Hofstad">ResearchGate</a></li>
+        <li><a href="https://www.med.uio.no/helsam/personer/vit/torehof/">UiO profile</a></li>
+      </ul>
+    </section>
+
+    <section class="card featured-research" aria-labelledby="featured-heading">
+      <h2 id="featured-heading">Featured research</h2>
+      <p class="publication-label"><em>The Lancet Psychiatry</em> · 2026</p>
+      <h3>What happens after compulsory mental health care?</h3>
+      <p>Our nationwide Norwegian registry study examines long-term health, criminal justice, and socioeconomic outcomes among people subject to compulsory mental health care.</p>
+      <div class="action-links">
+        <a class="button-link" href="https://doi.org/10.1016/S2215-0366(26)00275-0">Read the article <span aria-hidden="true">→</span></a>
+        <a href="research.html#publications">All publications <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="beyond-heading">
+      <h2 id="beyond-heading">Beyond research</h2>
+      <div class="interest-grid">
+        <article class="interest-teaser">
+          <h3>Music</h3>
+          <p>I play in Ping. Explore the band and our album <em>Songs from the Nebula</em>.</p>
+          <a href="other.html#music">More about the music <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="interest-teaser">
+          <h3>Film</h3>
+          <p>An interactive app for exploring the <em>Sight &amp; Sound</em> 2022 Greatest Films poll.</p>
+          <a href="other.html#film">Explore the film project <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="interest-teaser">
+          <h3>R &amp; visualisation</h3>
+          <p>A ggplot2 tutorial bringing together music, data and visual storytelling.</p>
+          <a href="ggplot-band-timeline.html">Build a band timeline <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </section>
   </main>
-  <footer>© <span id="year"></span> Tore Hofstad</footer>
+
+  <footer class="site-footer">© <span id="year">2026</span> Tore Hofstad</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

@@ -1,35 +1,63 @@
 <!doctype html>
 <html lang="en">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Other Interests - Tore Hofstad</title>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Other Interests | Tore Hofstad</title>
+  <meta name="description" content="Music with Ping, Songs from the Nebula, and an interactive R Shiny app for exploring the Sight &amp; Sound 2022 Greatest Films poll.">
+  <meta name="author" content="Tore Hofstad">
+  <link rel="canonical" href="https://torehof.github.io/other.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Other Interests | Tore Hofstad">
+  <meta property="og:description" content="Music with Ping, Songs from the Nebula, and an interactive R Shiny app for exploring the Sight &amp; Sound 2022 Greatest Films poll.">
+  <meta property="og:url" content="https://torehof.github.io/other.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-  <header>
-    <div>
-      <h1>Other Interests</h1>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="identity">
+        <a class="site-name" href="index.html">Tore Hofstad</a>
+        <h1>Other Interests</h1>
+      </div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="other.html" aria-current="page">Other Interests</a>
+        <a href="ggplot-band-timeline.html">ggplot2 Tutorial</a>
+      </nav>
     </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-      <a href="other.html">Other Interests</a>
-    </nav>
   </header>
-  <main>
-    <section class="card">
-      <h2>Music</h2>
-      <p>Beyond research, I am an active musician in <a href="http://www.thepingpage.com" target="_blank">Ping</a>. Our new album Songs from the Nebula can be heard <a href="https://orcd.co/ping-nebula" target="_blank">here</a>.</p>
+
+  <main id="main-content" tabindex="-1">
+    <section class="card" id="music" aria-labelledby="music-heading">
+      <h2 id="music-heading">Music</h2>
+      <div class="music-layout">
+        <div>
+          <p>Beyond research, I am an active musician in <a href="http://www.thepingpage.com">Ping</a>. Listen to our album <a href="https://orcd.co/ping-nebula"><em>Songs from the Nebula</em></a>.</p>
+          <p>Music also finds its way into my work with data visualisation: my <a href="ggplot-band-timeline.html">ggplot2 tutorial</a> shows how to create a timeline of Ping’s members and albums.</p>
+        </div>
+        <a class="album-art" href="https://orcd.co/ping-nebula">
+          <img src="images/album-covers/PING_Songs_From_The_Nebula.jpg" width="180" height="180" alt="Listen to Songs from the Nebula by Ping" loading="lazy" decoding="async">
+        </a>
+      </div>
     </section>
-    <section class="card">
-      <h2>Film</h2>
-      <p>I am a lifelong cinephile and movie lover. When the British Film Institute published the results of their 2022 <em>Sight &amp; Sound</em> Greatest Films poll — the most comprehensive survey of critical opinion in cinema, with over 2,000 voters — I wanted a better way to explore the data than a static list.</p>
-      <p>The result is an interactive Shiny app built in R, covering all 21,000+ ballot entries across 4,500+ unique films. It lets you browse the full rankings, explore individual voter ballots, filter by decade, country, or genre, and even build your own top-10 list and find your closest taste twin among the real voters.</p>
-      <p>The app was also an exercise in what is possible with R and Shiny for data visualisation. I built it with assistance from <a href="https://claude.ai" target="_blank">Claude</a>, and the full source code is available inside the app itself — so if you want to build something similar, you can use it as a starting point.</p>
-      <p><a href="https://tore-hofstad.shinyapps.io/sight_and_sound/" target="_blank">Explore the Sight &amp; Sound 2022 rankings →</a></p>
+
+    <section class="card" id="film" aria-labelledby="film-heading">
+      <h2 id="film-heading">Film</h2>
+      <h3>Explore the <em>Sight &amp; Sound</em> 2022 Greatest Films poll</h3>
+      <p>Browse the rankings and individual voter ballots, filter films by decade, country or genre, and build your own top-10 list to find the voters whose choices most closely match yours.</p>
+      <p><a class="button-link" href="https://tore-hofstad.shinyapps.io/sight_and_sound/">Open the interactive film app <span aria-hidden="true">→</span></a></p>
+      <p>I am a lifelong cinephile. When the British Film Institute published the results of its 2022 <em>Sight &amp; Sound</em> Greatest Films poll, I wanted a better way to explore the data than a static list. The result is an interactive Shiny app built in R, covering more than 21,000 ballot entries across over 4,500 films.</p>
+      <p>The app was also an exercise in what is possible with R and Shiny for data visualisation. I built it with assistance from <a href="https://claude.ai">Claude</a>. The full source code is available inside the app itself as a starting point for similar projects.</p>
     </section>
   </main>
-  <footer>© <span id="year"></span> Tore Hofstad</footer>
+
+  <footer class="site-footer">© <span id="year">2026</span> Tore Hofstad</footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
